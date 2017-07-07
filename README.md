@@ -4,6 +4,28 @@ Provides a way to display google maps from address(es) (w/ the javascript API), 
 
 [![CircleCI](https://circleci.com/gh/Cethy/GoogleMapDisplayBundle/tree/master.svg?style=shield)](https://circleci.com/gh/Cethy/GoogleMapDisplayBundle/tree/master)
 
+
+## Install
+
+1\. Composer require
+
+    $ composer require cethyworks/google-map-display-bundle 
+
+2\. Register bundles
+
+    // AppKernel.php
+    class AppKernel extends Kernel
+    {
+        public function registerBundles()
+        {
+            $bundles = [
+                // ...
+                new Cethyworks\ContentInjectorBundle\CethyworksContentInjectorBundle(),
+                new Cethyworks\GoogleMapDisplayBundle\CethyworksGoogleMapDisplayBundle(),
+            ];
+            // ...
+
+
 ## How to use
 1\. Update (optionally) your `config.yml` with :
 
