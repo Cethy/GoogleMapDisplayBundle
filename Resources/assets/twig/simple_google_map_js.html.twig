@@ -1,0 +1,41 @@
+<script>
+  function initMap() {
+    /**
+     * Display map if the address is correct, otherwise remove the html
+     */
+    var displayMap = function(geocoder, mapId, address) {
+      geocoder.geocode({'address': address}, function (results, status) {
+        if (status === 'OK') {
+          var map = new google.maps.Map(document.getElementById(mapId), {
+            center: results[0].geometry.location,
+            zoom: 15
+          });
+
+          new google.maps.Marker({
+            map: map,
+            position: results[0].geometry.location
+          });
+
+        } else {
+          document.getElementById(mapId).remove();
+        }
+      });
+    };
+
+    /**
+     * eg:
+     * addresses = [
+     *      {'mapId': 'mapId1', address: 'foo, France'},
+     *      {'mapId': 'mapId2', address: 'bar, Spain'}
+     *  ];
+     */
+    var addresses = {{ addresses|json_encode|raw }};
+    var geocoder = new google.maps.Geocoder();
+
+    for(var i=0;i<addresses.length;i++) {
+      displayMap(geocoder, addresses[i].mapId, addresses[i].address);
+    }
+  }
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?libraries=places&callback=initMap{{ (google_api_key ? ('&key='~ google_api_key))|raw }}"
+        async defer></script>
