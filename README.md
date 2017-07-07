@@ -2,6 +2,7 @@ Cethyworks\GoogleMapDisplayBundle
 ===
 Provides a way to display google maps from address(es) (w/ the javascript API), the most minimalist, unobtrusive way possible.
 
+[![CircleCI](https://circleci.com/gh/Cethy/GoogleMapDisplayBundle/tree/master.svg?style=shield)](https://circleci.com/gh/Cethy/GoogleMapDisplayBundle/tree/master)
 
 ## How to use
 1\. Update (optionally) your `config.yml` with :
