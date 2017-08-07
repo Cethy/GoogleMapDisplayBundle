@@ -1,6 +1,6 @@
 <?php
 
-namespace Cethyworks\GoogleMapDisplayBundle\Tests\Dummy;
+namespace Cethyworks\GoogleMapDisplayBundle\Tests\Functional\Mock;
 
 use Cethyworks\ContentInjectorBundle\CethyworksContentInjectorBundle;
 use Cethyworks\GoogleMapDisplayBundle\CethyworksGoogleMapDisplayBundle;
@@ -10,13 +10,7 @@ use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\HttpKernel\Bundle\BundleInterface;
 use Symfony\Component\HttpKernel\Kernel;
 
-/**
- * Created by PhpStorm.
- * User: cethy
- * Date: 07/07/2017
- * Time: 10:31
- */
-class DummyKernel extends Kernel
+class MockKernel extends Kernel
 {
 
     /**
@@ -42,12 +36,12 @@ class DummyKernel extends Kernel
 
     public function getCacheDir()
     {
-        return dirname(__DIR__).'/../var/cache/'.$this->getEnvironment();
+        return dirname(__DIR__).'/../../var/cache/'.$this->getEnvironment();
     }
 
     public function getLogDir()
     {
-        return dirname(__DIR__).'/../var/logs';
+        return dirname(__DIR__).'/../../var/logs';
     }
 
     /**

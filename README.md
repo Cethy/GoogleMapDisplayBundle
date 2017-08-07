@@ -21,7 +21,7 @@ Provides a way to display google maps from address(es) (w/ the javascript API), 
             $bundles = [
                 // ...
                 new Cethyworks\ContentInjectorBundle\CethyworksContentInjectorBundle(),
-                new Cethyworks\GoogleMapDisplayBundle\CethyworksGoogleMapDisplayBundle(),
+                new Cethyworks\GooglePlaceAutocompleteBundle\CethyworksGooglePlaceAutocompleteBundle(),
             ];
             // ...
 
@@ -33,30 +33,31 @@ Provides a way to display google maps from address(es) (w/ the javascript API), 
         google:
             api_key: 'your_api_key'
 
-2\. Add map info to the listener :
+2\. Call the wrapper to add maps :
 
-    // retrieve the listener
-    /** @var \Cethyworks\GoogleMapDisplayBundle\Listener\SimpleGoogleMapDisplayListener $gMapListener */
-    $gMapListener = $this->container->get('cethyworks.google_map_display.listener');
+    // retrieve the command wrapper
+    /** @var GoogleMapDisplayCommandWrapper $wrapper */
+    $commandWrapper = $container->get(GoogleMapDisplayCommandWrapper::class);
     // add address & html id to display the map
-    $gMapListener->addMap('map_id', 'address 1');
+    $commandWrapper->addMap('map_id', 'address 1');
     // optionnally add other maps 
-    // $gMapListener->addMap('map2', 'address 2');
+    // $commandWrapper->addMap('map2', 'address 2');
+    // ...
 
-3\. Register the listener 
+3\. Register the command into the `ContentInjectorSubscriber` : 
 
-    // register the listener on the kernel.response event
-     /** @var \Cethyworks\ContentInjectorBundle\Registerer\ListenerRegisterer $registerer */
-     $registerer = $this->container->get('cethyworks_content_injector.listener.registerer');
-     $registerer->addListener([$gMapListener, 'onKernelResponse']);
+    /** @var ContentInjectorSubscriber $injectorSubscriber */
+    $injectorSubscriber = $container->get(ContentInjectorSubscriber::class);
+    $injectorSubscriber->registerCommand($commandWrapper->getCommand());
 
-4\. That's it.
+4\. Done !
 
 
 ## How it works
-The `Cethyworks\GoogleMapDisplayBundle\Listener\SimpleGoogleMapDisplayListener` listener will inject 
-the javascript code needed (with mapIds, addresses & the google api_key) into the `Response` automatically.
+The `ContentInjectorSubscriber` will inject the template containing the javascript code (with mapIds, addresses & the google api_key) into the `Response` automatically.
 
 
 ## Additional information
+[Cethyworks\ContentInjectorBundle](https://github.com/Cethy/ContentInjectorBundle)
+
 [Google Map JS API Documentation](https://developers.google.com/maps/documentation/javascript/examples/map-simple)

@@ -1,17 +1,6 @@
 services:
-    # Factory
-    cethyworks.google_map_display.listener.factory:
-        class: Cethyworks\ContentInjectorBundle\Factory\TwigContentInjectorListenerFactory
+    # Wrapper
+    Cethyworks\GoogleMapDisplayBundle\Command\Wrapper\GoogleMapDisplayCommandWrapper:
         arguments:
-            - "@cethyworks_content_injector.simple_injector"
             - "@twig"
-            - { "google_api_key": "%cethyworks.google_map_display.google_api_key%" }
-
-
-    # Listener
-    cethyworks.google_map_display.listener:
-        class: Cethyworks\GoogleMapDisplayBundle\Listener\SimpleGoogleMapDisplayListener
-        factory: cethyworks.google_map_display.listener.factory:createListener
-        arguments:
-            - "Cethyworks\\GoogleMapDisplayBundle\\Listener\\SimpleGoogleMapDisplayListener"
-            - "@@CethyworksGoogleMapDisplayBundle/Resources/assets/twig/simple_google_map_js.html.twig"
+            - "%cethyworks.google_map_display.google_api_key%"
