@@ -29,6 +29,9 @@
         }
     ],
     "autoload": {
-        "psr-4": { "Cethyworks\\GoogleMapDisplayBundle\\": "" }
+        "psr-4": { "Cethyworks\\GoogleMapDisplayBundle\\": "src/" }
+    },
+    "autoload-dev": {
+        "psr-4": { "Cethyworks\\GoogleMapDisplayBundle\\Tests\\": "tests/" }
     }
 }
