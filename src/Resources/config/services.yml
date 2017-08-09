@@ -1,6 +1,6 @@
 services:
-    # Wrapper
-    Cethyworks\GoogleMapDisplayBundle\Command\Wrapper\GoogleMapDisplayCommandWrapper:
+    Cethyworks\GoogleMapDisplayBundle\Command\Handler\GoogleMapDisplayCommandHandler:
         arguments:
+            - "@Cethyworks\\ContentInjectorBundle\\EventSubscriber\\ContentInjectorSubscriber"
             - "@twig"
             - "%cethyworks.google_map_display.google_api_key%"

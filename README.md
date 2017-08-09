@@ -33,25 +33,18 @@ Provides a way to display google maps from address(es) (w/ the javascript API), 
         google:
             api_key: 'your_api_key'
 
-2\. Call the wrapper to add maps :
+2\. Call the handler to add maps :
 
-    // retrieve the command wrapper
-    /** @var GoogleMapDisplayCommandWrapper $wrapper */
-    $commandWrapper = $container->get(GoogleMapDisplayCommandWrapper::class);
+    // retrieve the command handler
+    /** @var GoogleMapDisplayCommandHandler $handler */
+    $commandHandler = $container->get(GoogleMapDisplayCommandHandler::class);
     // add address & html id to display the map
-    $commandWrapper->addMap('map_id', 'address 1');
+    $commandHandler->addMap('map_id', 'address 1');
     // optionnally add other maps 
-    // $commandWrapper->addMap('map2', 'address 2');
+    // $commandHandler->addMap('map2', 'address 2');
     // ...
 
-3\. Register the command into the `ContentInjectorSubscriber` : 
-
-    /** @var ContentInjectorSubscriber $injectorSubscriber */
-    $injectorSubscriber = $container->get(ContentInjectorSubscriber::class);
-    $injectorSubscriber->registerCommand($commandWrapper->getCommand());
-
-4\. Done !
-
+4\. Done ! (the handler register automatically the Command)
 
 ## How it works
 The `ContentInjectorSubscriber` will inject the template containing the javascript code (with mapIds, addresses & the google api_key) into the `Response` automatically.

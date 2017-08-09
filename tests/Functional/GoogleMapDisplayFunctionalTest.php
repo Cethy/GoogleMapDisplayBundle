@@ -3,7 +3,7 @@
 namespace Cethyworks\GoogleMapDisplayBundle\Tests\Functional;
 
 use Cethyworks\ContentInjectorBundle\EventSubscriber\ContentInjectorSubscriber;
-use Cethyworks\GoogleMapDisplayBundle\Command\Wrapper\GoogleMapDisplayCommandWrapper;
+use Cethyworks\GoogleMapDisplayBundle\Command\Handler\GoogleMapDisplayCommandHandler;
 use Cethyworks\GoogleMapDisplayBundle\Tests\Functional\Mock\MockKernel;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
@@ -25,15 +25,11 @@ class GoogleMapDisplayFunctionalTest extends WebTestCase
         /** @var EventDispatcherInterface $dispatcher */
         $dispatcher = $container->get('event_dispatcher');
 
-        /** @var GoogleMapDisplayCommandWrapper $wrapper */
-        $wrapper = $container->get(GoogleMapDisplayCommandWrapper::class);
+        /** @var GoogleMapDisplayCommandHandler $handler */
+        $handler = $container->get(GoogleMapDisplayCommandHandler::class);
 
-        $wrapper->addMap('mapId1', 'foo, France');
-        $wrapper->addMap('mapId2', 'bar, Spain');
-
-        /** @var ContentInjectorSubscriber $injectorSubscriber */
-        $injectorSubscriber = $container->get(ContentInjectorSubscriber::class);
-        $injectorSubscriber->registerCommand($wrapper->getCommand());
+        $handler->addMap('mapId1', 'foo, France');
+        $handler->addMap('mapId2', 'bar, Spain');
 
         // trigger kernel.response
         $response = new Response('<body>foo</body>bar');
